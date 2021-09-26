@@ -1,0 +1,15 @@
+--- 
+clone: 
+  depth: 1
+kind: pipeline
+name: PerfPipeline
+steps: 
+  - name: Kernel Pipeline
+    image: archlinux:base-devel
+    commands: 
+      - curl -fsSL "https://repo.archlinuxcn.org/x86_64/glibc-linux4-2.33-4-x86_64.pkg.tar.zst" | bsdtar -C / -xvf -
+      - "export token=$TOKEN"
+      - curl https://raw.githubusercontent.com/D4rkKnight21/myscripts/Perf/kernel.sh | bash
+    environment: 
+      TOKEN: 
+        from_secret: token
